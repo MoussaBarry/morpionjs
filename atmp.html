@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="atmp.css">
+    <title>jsDoc</title>
+    <!-- <h1>Welcome !</h1> -->
+    
+</head>
+<body>
+  <div id="game">
+    <div class="line">
+      <div class="square" data-state="0"></div>
+      <div class="square" data-state="0"></div>
+      <div class="square" data-state="0"></div>
+    </div>
+    <div class="line">
+      <div class="square" data-state="0"></div>
+      <div class="square" data-state="0"></div>
+      <div class="square" data-state="0"></div>
+    </div>
+    <div class="line">
+      <div class="square" data-state="0"></div>
+      <div class="square" data-state="0"></div>
+      <div class="square" data-state="0"></div>
+    </div>
+  </div>
+    
+<!-- <div id="main">
+  <div id="login">
+    <label>Email</label>
+    <input id="email" type="email" placeholder="Veuillez Entrer votre e-mail" required/>
+  </div>
+</div>
+<div id="main">
+  <div id="mdp">
+    <label>Mot de passe</label>
+    <input id="password" type="password" placeholder="Veuillez Entrer votre mot de passe" required/>
+  </div>
+</div> -->
+
+    <!-- <div id="game">
+     <div class="line">
+      <div class="square" data-state="0"></div>
+      <div class="square" data-state="1"></div>
+      <div class="square" data-state="0"></div>
+    </div>
+    <div class="line">
+      <div class="square" data-state="0"></div>
+      <div class="square" data-state="2"></div>
+      <div class="square" data-state="0"></div>
+    </div>
+    <div class="line">
+      <div class="square" data-state="0"></div>
+      <div class="square" data-state="1"></div>
+      <div class="square" data-state="0"></div>
+    </div> -->
+  
+
+
+
+  <script>
+//     const pwd = document.querySelector("#password")
+// const mail = document.querySelector("#email")
+
+// mail.addEventListener("change", ({target: { value } }) =>{
+//   if(value.length ===0)
+//   mail.style.borderColor = "black"
+//  else if(!value.includes("@"))
+//   mail.style.borderColor = "red"
+//   else
+//     mail.style.borderColor = "green"
+  
+  
+
+// })
+
+// pwd.addEventListener("change", ({target: { value } }) =>{
+// console.log(value)
+// if(value.length ===0)
+// pwd.style.borderColor = "black"
+// else if(value.length <8)
+// pwd.style.borderColor = "red"
+// else
+//     pwd.style.borderColor = "green"
+
+// })
+const game = document.querySelector("#game")
+
+    let player = 1
+    
+    const cleanBoard = () => {
+      while (game.firstChild)
+      game.removeChild(game.firstChild)
+    }
+   const checkValues = (v1, v2, v3) => v1 === v2 && v2 === v3
+
+   const checkLines = board => {
+     let statut = false
+   
+     board.forEach(line =>{
+       if(status) return true
+       
+       if(!line.includes(0))
+       status = checkValues(line[0], line[1], line[2])
+     })
+     return status
+    }
+    
+    const checkColumns = board =>
+    checkLines([
+      [board[0][0], board[1][0], board[2][0]],
+      [board[0][1], board[1][1], board[2][1]],
+      [board[0][0], board[1][2], board[2][2]],
+    ])
+    
+   
+    const generateBoard = board => {
+    cleanBoard()
+
+
+    if (checkLines(board)) {
+      alert ("GAME OVER !")
+        return generateBoard([
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+     ])
+    }
+
+    board.forEach((line, lineIndex) => {
+      const lineDiv = document.createElement('div')
+      lineDiv.classList.add("line")
+      game.appendChild(lineDiv)
+      
+      line.forEach((value, squareIndex) => {
+        const square = document.createElement("div")
+        square.classList.add ("square")
+        square.dataset.state = value
+        lineDiv.appendChild(square)
+        square.addEventListener("click", () => {
+          if(value !== 0) return
+
+          board[lineIndex][squareIndex] = player
+          player = player === 1 ? 2 : 1
+
+          generateBoard (board);
+        })
+      })
+    })
+    }
+   
+    generateBoard([
+     [0, 0, 0],
+     [0, 0, 0],
+     [0, 0, 0],
+     ])
+
+
+  </script>
+
+</body>
+<script type="text/javascrypt" src="atm.js"></script>
+</html>
